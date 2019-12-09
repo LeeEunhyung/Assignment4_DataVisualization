@@ -32,4 +32,4 @@ public/
 node_modules/
 package.json
 README.md
-yarn.locks
+yarn.lock
