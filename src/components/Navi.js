@@ -45,11 +45,11 @@ class Navi extends Component {
         } else if (this.props.clickedDB === 'chicago') {
             _subMenu = 
                 <div id = "subMenu">
-                    <input type = "button" id = "DataLoad" value = "DataLoad" onClick = {this.ChangeSubMenu}></input>
-                    <input type = "button" value = "BarChart" onClick = {this.ChangeSubMenu}></input>
-                    <input type = "button" value = "LineChart" onClick = {this.ChangeSubMenu}></input>
-                    <input type = "button" value = "PieChart" onClick = {this.ChangeSubMenu}></input>
-                    <input type = "button" value = "MapChart" onClick = {this.ChangeSubMenu}></input>
+                    <input type = "button" id = "ArrestLine" value = "년도별 채포율 추이" onClick = {this.ChangeSubMenu}></input>
+                    <input type = "button" id = "TypeBar" value = "범죄 유형별 채포율 Top 3" onClick = {this.ChangeSubMenu}></input>
+                    <input type = "button" id = "Firearm" value = "총기관련 범죄 구성율" onClick = {this.ChangeSubMenu}></input>
+                    <input type = "button" id = "Firearm" value = "총기관련 범죄 채포율" onClick = {this.ChangeSubMenu}></input>
+                    <input type = "button" id = "CrimeDistrict" value = "지역별 범죄 발생 비율 및 위험구역" onClick = {this.ChangeSubMenu}></input>
                 </div>;
         }
 
