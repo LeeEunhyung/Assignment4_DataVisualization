@@ -11,10 +11,25 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-    }
+      clickedDB: 'korea',
+      clickedSubMenu: 'DataLoad'
+    };
   }
 
   componentDidMount() {
+  }
+
+  ChangeDB = (_clickedDB) => {
+    this.setState({
+      clickedDB: _clickedDB
+    });
+  }
+
+  ChangeSubMenu = (_clickedSubMenu) => {
+    this.setState({
+      clickedSubMenu: _clickedSubMenu
+    });
+    alert(this.state.clickedSubMenu)
   }
 
   _test = async() => {
@@ -30,14 +45,14 @@ class App extends Component {
     return(
       <div className = "App">
         <div id = "top">
-          <Header></Header>
+          <Header ChangeDB = {this.ChangeDB}></Header>
         </div>
         <div id = "middle">
           <div id = "Navi">
-            <Navi></Navi>
+            <Navi clickedDB = {this.state.clickedDB} ChangeSubMenu = {this.ChangeSubMenu}></Navi>
           </div>
           <div id = "Main">
-            <Main></Main>
+            <Main clickedSubMenu = {this.state.clickedSubMenu}></Main>
           </div>
         </div>
         <div id = "bottom">

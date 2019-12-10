@@ -8,7 +8,6 @@
 .App > #top {
   width: 100%;
   height: 10%;
-  border: solid 1px black;
 }
 
 .App > #middle {
@@ -16,7 +15,6 @@
   flex-direction: row;
   width: 100%;
   height: 85%;
-  border: solid 1px black;
 }
 
 .App > #middle > #Navi {
@@ -28,7 +26,6 @@
 .App > #middle > #Main {
   width: 85%;
   height: 100%;
-  border: solid 1px black;
 }
 
 .App > #bottom {
