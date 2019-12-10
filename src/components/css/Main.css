@@ -4,6 +4,12 @@
     overflow-y: scroll;
 }
 
+.Main > div > .second {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
 .Main > div > .line1 {
     width: 500px;
     height: 300px;

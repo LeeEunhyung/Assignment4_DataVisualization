@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import './App.css';
 
@@ -13,7 +12,7 @@ class App extends Component {
     super(props)
     this.state = {
       clickedDB: "korea",
-      clickedSubMenu: "교통사고 발생건수와 사상자수"
+      clickedSubMenu: ""
     };
   }
 
@@ -37,15 +36,6 @@ class App extends Component {
   ChangeSubMenu = (_clickedSubMenu) => {
     this.setState({
       clickedSubMenu: _clickedSubMenu
-    });
-  }
-
-  _test = async() => {
-    await axios({
-      url: '/test',
-      method: 'POST'
-    }).then(response => response.data).then((data) => {
-      alert(data);
     });
   }
 

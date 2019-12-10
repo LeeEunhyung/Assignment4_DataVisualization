@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import * as d3 from 'd3';
 
 import './css/Main.css';
@@ -16,11 +17,19 @@ class Main extends Component {
         this.drawChart();
     }
 
-    firstSubMenu_1 = () => {
+    _line1 = async() => {
+        await axios({
+            url: '/line1',
+            method: 'POST'
+          }).then(response => response.data).then((data) => {
+              this.firstSubMenu_1(data);
+          });
+    }
+    firstSubMenu_1 = (data) => {
         var series = ["교통사고 발생건수", "교통사고 사상자수"];
         var data_set = ['2012', '2013', '2014', '2015', '2016', '2017', '2018'];
-        var data_발생건수 = [8494, 7856, 8047, 7932, 6423, 5666, 4824];
-        var data_사상자수 = [8909, 8298, 8522, 8394, 6806, 6013, 5071];
+        var data_발생건수 = [data.발생건수_2012, data.발생건수_2013, data.발생건수_2014, data.발생건수_2015, data.발생건수_2016, data.발생건수_2017, data.발생건수_2018];
+        var data_사상자수 = [data.사상자수_2012, data.사상자수_2013, data.사상자수_2014, data.사상자수_2015, data.사상자수_2016, data.사상자수_2017, data.사상자수_2018];
 
         var color = ["#fa4659", "#11cbd7"];
 
@@ -83,7 +92,7 @@ class Main extends Component {
                 .attr('y2', 270 - 46 * i)
                 .style("stroke", 'black')
                 .style("stroke-width",0.5);
-            if(i == 0) {
+            if(i === 0) {
             svg.append('text')
                 .attr('x', 0)
                 .attr('y', 270 - 46 * i)
@@ -188,15 +197,24 @@ class Main extends Component {
             .attr("fill", "black")
         }
     }
-    firstSubMenu_2 = () => {
+
+    _bar1 = async() => {
+        await axios({
+            url: '/bar1',
+            method: 'POST'
+          }).then(response => response.data).then((data) => {
+              this.firstSubMenu_2(data);
+          });
+    }
+    firstSubMenu_2 = (data) => {
         //년도별 교통사고 사상자수 세부 구성
         var series = ["부상자수", "경상자수", "중상자수", "사망자수"];
         var data_set = ['2012', '2013', '2014', '2015', '2016', '2017', '2018'];
 
-        var data_부상자 = [383, 474, 654, 701, 588, 434, 376];
-        var data_경상자 = [3408, 3172, 3483, 3478, 2950, 2601, 2123];
-        var data_중상자 = [4612, 4267, 4049, 3855, 2982, 2678, 2321];
-        var data_사망자 = [510, 385, 336, 360, 286, 300, 251];
+        var data_부상자 = [data.부상자_2012, data.부상자_2013, data.부상자_2014, data.부상자_2015, data.부상자_2016, data.부상자_2017, data.부상자_2018];
+        var data_경상자 = [data.경상자_2012, data.경상자_2013, data.경상자_2014, data.경상자_2015, data.경상자_2016, data.경상자_2017, data.경상자_2018];
+        var data_중상자 = [data.중상자_2012, data.중상자_2013, data.중상자_2014, data.중상자_2015, data.중상자_2016, data.중상자_2017, data.중상자_2018];
+        var data_사망자 = [data.사망자_2012, data.사망자_2013, data.사망자_2014, data.사망자_2015, data.사망자_2016, data.사망자_2017, data.사망자_2018];
 
         var color = ["#d0efff", "#2a9df4", "#1167b1", "#03254c"];
 
@@ -397,10 +415,18 @@ class Main extends Component {
                             .attr("fill", "black")
                         }
     }
-    secondSubMenu_1 = () => {
+
+    _bar2 = async() => {
+        await axios({
+            url: '/bar2',
+            method: 'POST'
+          }).then(response => response.data).then((data) => {
+              this.secondSubMenu_1(data);
+          });
+    }
+    secondSubMenu_1 = (data) => {
         //사고유형별 발생건수
-        var series = ["자전거", "보행노인", "무단횡단", "보행어린이", "스쿨존어린이"];
-        var data_set = [17769, 16201, 11772, 2942, 558];
+        var data_set = [data.자전거, data.보행노인, data.무단횡단, data.보행어린이, data.스쿨존어린이];
 
         var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
 
@@ -537,238 +563,738 @@ class Main extends Component {
                     .attr("fill", "black")
                 }
     }
-    secondSubMenu_2 = () => {
-//사고유형별 년도에 따른 발생건수 추이
-var series = ["자전거", "보행노인", "무단횡단", "보행어린이", "스쿨존어린이"];
-var data_set = ['2012', '2013', '2014', '2015', '2016', '2017', '2018'];
 
-var data_자전거 = [2432, 2505, 3329, 3384, 2558, 1967, 1594];
-var data_보행노인 = [2049, 2220, 2549, 2582, 2393, 2252, 2156];
-var data_무단횡단 = [3231, 2531, 1607, 1493, 1056, 1122, 732];
-var data_보행어린이 = [708, 544, 472, 385, 321, 257, 255];
-var data_스쿨존어린이 = [74,  56, 90, 88, 95, 68, 87];
+    _line2 = async() => {
+        await axios({
+            url: '/line2',
+            method: 'POST'
+          }).then(response => response.data).then((data) => {
+              this.secondSubMenu_2(data);
+          });
+    }
+    secondSubMenu_2 = (data) => {
+        //사고유형별 년도에 따른 발생건수 추이
+        var series = ["자전거", "보행노인", "무단횡단", "보행어린이", "스쿨존어린이"];
+        var data_set = ['2012', '2013', '2014', '2015', '2016', '2017', '2018'];
 
-var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
+        var data_자전거 = [data.자전거_2012, data.자전거_2013, data.자전거_2014, data.자전거_2015, data.자전거_2016, data.자전거_2017, data.자전거_2018];
+        var data_보행노인 = [data.보행노인_2012, data.보행노인_2013, data.보행노인_2014, data.보행노인_2015, data.보행노인_2016, data.보행노인_2017, data.보행노인_2018];
+        var data_무단횡단 = [data.무단횡단_2012, data.무단횡단_2013, data.무단횡단_2014, data.무단횡단_2015, data.무단횡단_2016, data.무단횡단_2017, data.무단횡단_2018];
+        var data_보행어린이 = [data.보행어린이_2012, data.보행어린이_2013, data.보행어린이_2014, data.보행어린이_2015, data.보행어린이_2016, data.보행어린이_2017, data.보행어린이_2018];
+        var data_스쿨존어린이 = [data.스쿨존어린이_2012, data.스쿨존어린이_2013, data.스쿨존어린이_2014, data.스쿨존어린이_2015, data.스쿨존어린이_2016, data.스쿨존어린이_2017, data.스쿨존어린이_2018];
 
-var svg = d3.select(".line2")
-            .append("svg")
-            .attr('width', 500)
-            .attr('height', 500);
+        var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
 
-            svg.append('line') //x축
-            .attr('x1', 40)
-            .attr('y1', 470)
-            .attr('x2', 480)
-            .attr('y2', 470)
-            .style("stroke", 'black')
-            .style("stroke-width",0.5);
-            svg.append('line') //x축
-            .attr('x1', 40)
-            .attr('y1', 30)
-            .attr('x2', 480)
-            .attr('y2', 30)
-            .style("stroke", 'black')
-            .style("stroke-width",0.5);
-    
-        svg.append('line') //y축
-            .attr('x1', 40)
-            .attr('y1', 30)
-            .attr('x2', 40)
-            .attr('y2', 470)
-            .style("stroke", 'black')
-            .style("stroke-width",0.5);
-            svg.append('line') //y축
-            .attr('x1', 480)
-            .attr('y1', 30)
-            .attr('x2', 480)
-            .attr('y2', 470)
-            .style("stroke", 'black')
-            .style("stroke-width",0.5);
-    
-            for(var i = 0; i<8; i++) {
-                svg.append('line')
+        var svg = d3.select(".line2")
+                    .append("svg")
+                    .attr('width', 500)
+                    .attr('height', 500);
+
+                    svg.append('line') //x축
                     .attr('x1', 40)
-                    .attr('y1', 470 - 63 * i)
+                    .attr('y1', 470)
                     .attr('x2', 480)
-                    .attr('y2', 470 - 63 * i)
-                    .style("stroke", 'black')
-                    .style("stroke-width",0.2);
-    
-                    svg.append('line')
-                    .attr('x1', 40)
-                    .attr('y1', 470 - 63 * i)
-                    .attr('x2', 50)
-                    .attr('y2', 470 - 63 * i)
-                    .style("stroke", 'black')
-                    .style("stroke-width",0.5);
-
-                    svg.append('text')
-                    .attr('x', 5)
-                    .attr('y', 470 - 63 * i + 7)
-                    .text(i * 500)
-                    .style("font-size", "13px")
-                    .attr("font-family", "맑은고딕")
-                    .attr("fill", "black")
-            }    
-            for(var i = 0; i<7; i++) {
-                svg.append('line')
-                    .attr('x1', 64 * (i+1))
-                    .attr('y1', 30)
-                    .attr('x2', 64 * (i+1))
                     .attr('y2', 470)
                     .style("stroke", 'black')
-                    .style("stroke-width",0.2);
+                    .style("stroke-width",0.5);
+                    svg.append('line') //x축
+                    .attr('x1', 40)
+                    .attr('y1', 30)
+                    .attr('x2', 480)
+                    .attr('y2', 30)
+                    .style("stroke", 'black')
+                    .style("stroke-width",0.5);
+            
+                svg.append('line') //y축
+                    .attr('x1', 40)
+                    .attr('y1', 30)
+                    .attr('x2', 40)
+                    .attr('y2', 470)
+                    .style("stroke", 'black')
+                    .style("stroke-width",0.5);
+                    svg.append('line') //y축
+                    .attr('x1', 480)
+                    .attr('y1', 30)
+                    .attr('x2', 480)
+                    .attr('y2', 470)
+                    .style("stroke", 'black')
+                    .style("stroke-width",0.5);
+            
+                    for(var i = 0; i<9; i++) {
+                        svg.append('line')
+                            .attr('x1', 40)
+                            .attr('y1', 470 - 55 * i)
+                            .attr('x2', 480)
+                            .attr('y2', 470 - 55 * i)
+                            .style("stroke", 'black')
+                            .style("stroke-width",0.2);
+            
+                            svg.append('line')
+                            .attr('x1', 40)
+                            .attr('y1', 470 - 55 * i)
+                            .attr('x2', 50)
+                            .attr('y2', 470 - 55 * i)
+                            .style("stroke", 'black')
+                            .style("stroke-width",0.5);
 
-                    svg.append('text')
-                    .attr('x', 64 * (i+1) - 15)
-                    .attr('y', 490)
-                    .text(data_set[i])
-                    .style("font-size", "13px")
-                    .attr("font-family", "맑은고딕")
-                    .attr("fill", "black")
-                    .attr("font-weight", "bold")
-            }
+                            svg.append('text')
+                            .attr('x', 5)
+                            .attr('y', 470 - 55 * i + 7)
+                            .text(i * 500)
+                            .style("font-size", "13px")
+                            .attr("font-family", "맑은고딕")
+                            .attr("fill", "black")
+                    }    
+                    for(var i = 0; i<7; i++) {
+                        svg.append('line')
+                            .attr('x1', 64 * (i+1))
+                            .attr('y1', 30)
+                            .attr('x2', 64 * (i+1))
+                            .attr('y2', 470)
+                            .style("stroke", 'black')
+                            .style("stroke-width",0.2);
 
-            //line
-            for (var i = 0; i < 6; i++) {
-                svg.append('line')
-                .attr('x1', 64 * (i+1))
-                .attr('y1', 470 - (63 * data_자전거[i] / 500))
-                .attr('x2', 64 * (i+2))
-                .attr('y2', 470 - (63 * data_자전거[i+1] / 500))
-                .style("stroke", color[0])
-                .style("stroke-width", 2)
-                
-                svg.append('line')
-                .attr('x1', 64 * (i+1))
-                .attr('y1', 470 - (63 * data_보행노인[i] / 500))
-                .attr('x2', 64 * (i+2))
-                .attr('y2', 470 - (63 * data_보행노인[i+1] / 500))
-                .style("stroke", color[1])
-                .style("stroke-width", 2)
-                
-                svg.append('line')
-                .attr('x1', 64 * (i+1))
-                .attr('y1', 470 - (63 * data_무단횡단[i] / 500))
-                .attr('x2', 64 * (i+2))
-                .attr('y2', 470 - (63 * data_무단횡단[i+1] / 500))
-                .style("stroke", color[2])
-                .style("stroke-width", 2)
-                
-                svg.append('line')
-                .attr('x1', 64 * (i+1))
-                .attr('y1', 470 - (63 * data_보행어린이[i] / 500))
-                .attr('x2', 64 * (i+2))
-                .attr('y2', 470 - (63 * data_보행어린이[i+1] / 500))
-                .style("stroke", color[3])
-                .style("stroke-width", 2)
-                
-                svg.append('line')
-                .attr('x1', 64 * (i+1))
-                .attr('y1', 470 - (63 * data_스쿨존어린이[i] / 500))
-                .attr('x2', 64 * (i+2))
-                .attr('y2', 470 - (63 * data_스쿨존어린이[i+1] / 500))
-                .style("stroke", color[4])
-                .style("stroke-width", 2)
-            }
+                            svg.append('text')
+                            .attr('x', 64 * (i+1) - 15)
+                            .attr('y', 490)
+                            .text(data_set[i])
+                            .style("font-size", "13px")
+                            .attr("font-family", "맑은고딕")
+                            .attr("fill", "black")
+                            .attr("font-weight", "bold")
+                    }
 
-            //dot
-            for (var i = 0; i < 7; i++) {
-                svg.append('circle')
-                .attr('cx', 64 * (i+1))
-                .attr('cy', 470 - (63 * data_자전거[i] / 500))
-                .attr('r', 3)
-                .style("fill", color[0])
-                
-                svg.append('text')
-                .attr("x", 64 * (i+1) + 10) 
-                .attr("y", 470 - (63 * data_자전거[i] / 500) + 5)
-                .text(data_자전거[i])
-                .style("font-size", "10px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
+                    //line
+                    for (var i = 0; i < 6; i++) {
+                        svg.append('line')
+                        .attr('x1', 64 * (i+1))
+                        .attr('y1', 470 - (55 * data_자전거[i] / 500))
+                        .attr('x2', 64 * (i+2))
+                        .attr('y2', 470 - (55 * data_자전거[i+1] / 500))
+                        .style("stroke", color[0])
+                        .style("stroke-width", 2)
+                        
+                        svg.append('line')
+                        .attr('x1', 64 * (i+1))
+                        .attr('y1', 470 - (55 * data_보행노인[i] / 500))
+                        .attr('x2', 64 * (i+2))
+                        .attr('y2', 470 - (55 * data_보행노인[i+1] / 500))
+                        .style("stroke", color[1])
+                        .style("stroke-width", 2)
+                        
+                        svg.append('line')
+                        .attr('x1', 64 * (i+1))
+                        .attr('y1', 470 - (55 * data_무단횡단[i] / 500))
+                        .attr('x2', 64 * (i+2))
+                        .attr('y2', 470 - (55 * data_무단횡단[i+1] / 500))
+                        .style("stroke", color[2])
+                        .style("stroke-width", 2)
+                        
+                        svg.append('line')
+                        .attr('x1', 64 * (i+1))
+                        .attr('y1', 470 - (55 * data_보행어린이[i] / 500))
+                        .attr('x2', 64 * (i+2))
+                        .attr('y2', 470 - (55 * data_보행어린이[i+1] / 500))
+                        .style("stroke", color[3])
+                        .style("stroke-width", 2)
+                        
+                        svg.append('line')
+                        .attr('x1', 64 * (i+1))
+                        .attr('y1', 470 - (55 * data_스쿨존어린이[i] / 500))
+                        .attr('x2', 64 * (i+2))
+                        .attr('y2', 470 - (55 * data_스쿨존어린이[i+1] / 500))
+                        .style("stroke", color[4])
+                        .style("stroke-width", 2)
+                    }
 
-                svg.append('circle')
-                .attr('cx', 64 * (i+1))
-                .attr('cy', 470 - (63 * data_보행노인[i] / 500))
-                .attr('r', 3)
-                .style("fill", color[1])
+                    //dot
+                    for (var i = 0; i < 7; i++) {
+                        svg.append('circle')
+                        .attr('cx', 64 * (i+1))
+                        .attr('cy', 470 - (55 * data_자전거[i] / 500))
+                        .attr('r', 3)
+                        .style("fill", color[0])
+                        
+                        svg.append('text')
+                        .attr("x", 64 * (i+1) + 10) 
+                        .attr("y", 470 - (55 * data_자전거[i] / 500) + 5)
+                        .text(data_자전거[i])
+                        .style("font-size", "10px")
+                        .attr("font-family", "맑은고딕")
+                        .attr("fill", "black")
 
-                svg.append('text')
-                .attr("x", 64 * (i+1) + 10) 
-                .attr("y", 470 - (63 * data_보행노인[i] / 500) + 5)
-                .text(data_보행노인[i])
-                .style("font-size", "10px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
+                        svg.append('circle')
+                        .attr('cx', 64 * (i+1))
+                        .attr('cy', 470 - (55 * data_보행노인[i] / 500))
+                        .attr('r', 3)
+                        .style("fill", color[1])
 
-                svg.append('circle')
-                .attr('cx', 64 * (i+1))
-                .attr('cy', 470 - (63 * data_무단횡단[i] / 500))
-                .attr('r', 3)
-                .style("fill", color[2])
+                        svg.append('text')
+                        .attr("x", 64 * (i+1) + 10) 
+                        .attr("y", 470 - (55 * data_보행노인[i] / 500) + 5)
+                        .text(data_보행노인[i])
+                        .style("font-size", "10px")
+                        .attr("font-family", "맑은고딕")
+                        .attr("fill", "black")
 
-                svg.append('text')
-                .attr("x", 64 * (i+1) + 5) 
-                .attr("y", 470 - (63 * data_무단횡단[i] / 500) - 5)
-                .text(data_무단횡단[i])
-                .style("font-size", "10px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
+                        svg.append('circle')
+                        .attr('cx', 64 * (i+1))
+                        .attr('cy', 470 - (55 * data_무단횡단[i] / 500))
+                        .attr('r', 3)
+                        .style("fill", color[2])
 
-                svg.append('circle')
-                .attr('cx', 64 * (i+1))
-                .attr('cy', 470 - (63 * data_보행어린이[i] / 500))
-                .attr('r', 3)
-                .style("fill", color[3])
+                        svg.append('text')
+                        .attr("x", 64 * (i+1) + 5) 
+                        .attr("y", 470 - (55 * data_무단횡단[i] / 500) - 5)
+                        .text(data_무단횡단[i])
+                        .style("font-size", "10px")
+                        .attr("font-family", "맑은고딕")
+                        .attr("fill", "black")
 
-                svg.append('text')
-                .attr("x", 64 * (i+1) + 10) 
-                .attr("y", 470 - (63 * data_보행어린이[i] / 500) + 5)
-                .text(data_보행어린이[i])
-                .style("font-size", "10px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
+                        svg.append('circle')
+                        .attr('cx', 64 * (i+1))
+                        .attr('cy', 470 - (55 * data_보행어린이[i] / 500))
+                        .attr('r', 3)
+                        .style("fill", color[3])
 
-                svg.append('circle')
-                .attr('cx', 64 * (i+1))
-                .attr('cy', 470 - (63 * data_스쿨존어린이[i] / 500))
-                .attr('r', 3)
-                .style("fill", color[4])
+                        svg.append('text')
+                        .attr("x", 64 * (i+1) + 10) 
+                        .attr("y", 470 - (55 * data_보행어린이[i] / 500) + 5)
+                        .text(data_보행어린이[i])
+                        .style("font-size", "10px")
+                        .attr("font-family", "맑은고딕")
+                        .attr("fill", "black")
 
-                svg.append('text')
-                .attr("x", 64 * (i+1) + 10) 
-                .attr("y", 470 - (63 * data_스쿨존어린이[i] / 500) + 5)
-                .text(data_스쿨존어린이[i])
-                .style("font-size", "10px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-            }
+                        svg.append('circle')
+                        .attr('cx', 64 * (i+1))
+                        .attr('cy', 470 - (55 * data_스쿨존어린이[i] / 500))
+                        .attr('r', 3)
+                        .style("fill", color[4])
 
-            for(var i = 0; i < 5; i++) {
-                svg.append("rect")
-                .attr("x", 457) 
-                .attr("y", 34 + i*21)
-                .attr("width", 19) 
-                .attr("height", 19) 
-                .attr("fill", color[i])
+                        svg.append('text')
+                        .attr("x", 64 * (i+1) + 10) 
+                        .attr("y", 470 - (55 * data_스쿨존어린이[i] / 500) + 5)
+                        .text(data_스쿨존어린이[i])
+                        .style("font-size", "10px")
+                        .attr("font-family", "맑은고딕")
+                        .attr("fill", "black")
+                    }
 
-                svg.append("text")
-                .attr("x", 376) 
-                .attr("y", 48 + i*21)
-                .text(series[i])
-                .style("font-size", "13px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-            }
+                    for(var i = 0; i < 5; i++) {
+                        svg.append("rect")
+                        .attr("x", 457) 
+                        .attr("y", 34 + i*21)
+                        .attr("width", 19) 
+                        .attr("height", 19) 
+                        .attr("fill", color[i])
+
+                        svg.append("text")
+                        .attr("x", 376) 
+                        .attr("y", 48 + i*21)
+                        .text(series[i])
+                        .style("font-size", "13px")
+                        .attr("font-family", "맑은고딕")
+                        .attr("fill", "black")
+                    }
     }
-    thirdSubMenu_1 = () => {
-        this.pieChart_1();
-        this.pieChart_2();
-        this.pieChart_3();
-        this.pieChart_4();
-        this.pieChart_5();
+
+    _pie1 = async() => {
+        await axios({
+          url: '/pie1',
+          method: 'POST'
+        }).then(response => response.data).then((data) => {
+            this.pieChart_1(data);
+        });
     }
+    _pie2 = async() => {
+        await axios({
+          url: '/pie2',
+          method: 'POST'
+        }).then(response => response.data).then((data) => {
+            this.pieChart_2(data);
+        });
+    }
+    _pie3 = async() => {
+        await axios({
+          url: '/pie3',
+          method: 'POST'
+        }).then(response => response.data).then((data) => {
+            this.pieChart_3(data);
+        });
+    }
+    _pie4 = async() => {
+        await axios({
+          url: '/pie4',
+          method: 'POST'
+        }).then(response => response.data).then((data) => {
+            this.pieChart_4(data);
+        });
+    }
+    _pie5 = async() => {
+        await axios({
+          url: '/pie5',
+          method: 'POST'
+        }).then(response => response.data).then((data) => {
+            this.pieChart_5(data);
+        });
+    }
+    pieChart_1 = (data) => {
+        //사상자수 구성률
+        var sum_data = data.자전거 + data.보행노인 + data.무단횡단 + data.보행어린이 + data.스쿨존어린이;
+        var data_사상자수 = [data.자전거/sum_data, data.보행노인/sum_data, data.무단횡단/sum_data, data.보행어린이/sum_data, data.스쿨존어린이/sum_data];
+        
+        if (this.state.type === "전체") {
+            var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
+        } else if (this.state.type === "자전거") {
+            var color = ["#f9ed69", "gray", "gray", "gray", "gray"];
+        } else if (this.state.type === "보행노인") {
+            var color = ["gray", "#f08a5d", "gray", "gray", "gray"];
+        } else if (this.state.type === "무단횡단") {
+            var color = ["gray", "gray", "#b83b5e", "gray", "gray"];
+        } else if (this.state.type === "보행어린이") {
+            var color = ["gray", "gray", "gray", "#6a2c70", "gray"];
+        } else if (this.state.type === "스쿨존어린이") {
+            var color = ["gray", "gray", "gray", "gray", "#08d9d6"];
+        }
+        
+        var svg1 = d3.select(".pie1")
+                    .append("svg")
+                    .attr("width", 300)
+                    .attr("height", 300)
+
+        var arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(100);
+
+        var p1 = svg1.selectAll("path")
+                .data(d3.pie()(data_사상자수))
+                .enter()
+                .append("path")
+                .attr("class", "pie")
+                .attr("transform", "translate(150, 150)")
+                .style("fill",function(d, i) {
+                    return color[i];
+                })
+                .attr('d', arc)
+
+            svg1.append("text")
+                .attr("x", 80)
+                .attr("y", 280)
+                .text("<사상자수 구성률>")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+            
+            svg1.append("text")
+                .attr("x", 180)
+                .attr("y", 130)
+                .text((data_사상자수[0] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg1.append("text")
+                .attr("x", 120)
+                .attr("y", 210)
+                .text((data_사상자수[1] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg1.append("text")
+                .attr("x", 70)
+                .attr("y", 130)
+                .text((data_사상자수[2] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg1.append("text")
+                .attr("x", 90)
+                .attr("y", 40)
+                .text((data_사상자수[3] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg1.append("text")
+                .attr("x", 150)
+                .attr("y", 40)
+                .text((data_사상자수[4] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+    }
+    pieChart_2 = (data) => {
+        //부상자수 구성률
+        var series = ["사상자수", "부상자수", "경상자수", "중상자수", "사망자수"];
+        var data_set = ['자전거', '보행노인', '무단횡단', '보행어린이', '스쿨존어린이'];
+        //3610
+        var sum_data = data.자전거 + data.보행노인 + data.무단횡단 + data.보행어린이 + data.스쿨존어린이;
+        var data_부상자수 = [data.자전거/sum_data, data.보행노인/sum_data, data.무단횡단/sum_data, data.보행어린이/sum_data, data.스쿨존어린이/sum_data];
+        
+        //var data_부상자수 = [2396/3610, 551/3610, 440/3610, 201/3610, 22/3610];
+
+        if (this.state.type === "전체") {
+            var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
+        } else if (this.state.type === "자전거") {
+            var color = ["#f9ed69", "gray", "gray", "gray", "gray"];
+        } else if (this.state.type === "보행노인") {
+            var color = ["gray", "#f08a5d", "gray", "gray", "gray"];
+        } else if (this.state.type === "무단횡단") {
+            var color = ["gray", "gray", "#b83b5e", "gray", "gray"];
+        } else if (this.state.type === "보행어린이") {
+            var color = ["gray", "gray", "gray", "#6a2c70", "gray"];
+        } else if (this.state.type === "스쿨존어린이") {
+            var color = ["gray", "gray", "gray", "gray", "#08d9d6"];
+        }
+
+        var svg2 = d3.select(".pie2")
+                    .append("svg")
+                    .attr("width", 300)
+                    .attr("height", 300)
+
+        var arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(100);
+
+        var p2 = svg2.selectAll("path")
+                .data(d3.pie()(data_부상자수))
+                .enter()
+                .append("path")
+                .attr("class", "pie")
+                .attr("transform", "translate(150, 150)")
+                .style("fill",function(d, i) {
+                    return color[i];
+                })
+                .attr('d', arc)
+
+                svg2.append("text")
+                .attr("x", 80)
+                .attr("y", 280)
+                .text("<부상자수 구성률>")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg2.append("text")
+                .attr("x", 180)
+                .attr("y", 180)
+                .text((data_부상자수[0] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg2.append("text")
+                .attr("x", 70)
+                .attr("y", 160)
+                .text((data_부상자수[1] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg2.append("text")
+                .attr("x", 80)
+                .attr("y", 110)
+                .text((data_부상자수[2] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg2.append("text")
+                .attr("x", 100)
+                .attr("y", 40)
+                .text((data_부상자수[3] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg2.append("text")
+                .attr("x", 150)
+                .attr("y", 40)
+                .text((data_부상자수[4] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+
+    }
+    pieChart_3 = (data) => {
+        //경상자수 구성률
+        var series = ["사상자수", "부상자수", "경상자수", "중상자수", "사망자수"];
+        var data_set = ['자전거', '보행노인', '무단횡단', '보행어린이', '스쿨존어린이'];
+        //21215
+        //var data_경상자수 = [9542/21215, 5204/21215, 4222/21215, 1918/21215, 329/21215];
+
+        var sum_data = data.자전거 + data.보행노인 + data.무단횡단 + data.보행어린이 + data.스쿨존어린이;
+        var data_경상자수 = [data.자전거/sum_data, data.보행노인/sum_data, data.무단횡단/sum_data, data.보행어린이/sum_data, data.스쿨존어린이/sum_data];
+
+        if (this.state.type === "전체") {
+            var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
+        } else if (this.state.type === "자전거") {
+            var color = ["#f9ed69", "gray", "gray", "gray", "gray"];
+        } else if (this.state.type === "보행노인") {
+            var color = ["gray", "#f08a5d", "gray", "gray", "gray"];
+        } else if (this.state.type === "무단횡단") {
+            var color = ["gray", "gray", "#b83b5e", "gray", "gray"];
+        } else if (this.state.type === "보행어린이") {
+            var color = ["gray", "gray", "gray", "#6a2c70", "gray"];
+        } else if (this.state.type === "스쿨존어린이") {
+            var color = ["gray", "gray", "gray", "gray", "#08d9d6"];
+        }
+        var svg3 = d3.select(".pie3")
+                    .append("svg")
+                    .attr("width", 300)
+                    .attr("height", 300)
+
+        var arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(100);
+
+        var p3 = svg3.selectAll("path")
+                .data(d3.pie()(data_경상자수))
+                .enter()
+                .append("path")
+                .attr("class", "pie")
+                .attr("transform", "translate(150, 150)")
+                .style("fill",function(d, i) {
+                    return color[i];
+                })
+                .attr('d', arc)
+
+            svg3.append("text")
+                .attr("x", 80)
+                .attr("y", 280)
+                .text("<경상자수 구성률>")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+                
+            svg3.append("text")
+            .attr("x", 180)
+            .attr("y", 150)
+            .text((data_경상자수[0] * 100).toFixed(1)+ "%")
+            .style("font-size", "16px")
+            .attr("font-family", "맑은고딕")
+            .attr("fill", "black")
+
+            svg3.append("text")
+            .attr("x", 110)
+            .attr("y", 210)
+            .text((data_경상자수[1] * 100).toFixed(1)+ "%")
+            .style("font-size", "16px")
+            .attr("font-family", "맑은고딕")
+            .attr("fill", "black")
+
+            svg3.append("text")
+            .attr("x", 70)
+            .attr("y", 140)
+            .text((data_경상자수[2] * 100).toFixed(1)+ "%")
+            .style("font-size", "16px")
+            .attr("font-family", "맑은고딕")
+            .attr("fill", "black")
+
+            svg3.append("text")
+            .attr("x", 90)
+            .attr("y", 40)
+            .text((data_경상자수[3] * 100).toFixed(1)+ "%")
+            .style("font-size", "16px")
+            .attr("font-family", "맑은고딕")
+            .attr("fill", "black")
+
+            svg3.append("text")
+            .attr("x", 140)
+            .attr("y", 40)
+            .text((data_경상자수[4] * 100).toFixed(1)+ "%")
+            .style("font-size", "16px")
+            .attr("font-family", "맑은고딕")
+            .attr("fill", "black")
+    }
+    pieChart_4 = (data) => {
+        //중상자수 구성률
+        var series = ["사상자수", "부상자수", "경상자수", "중상자수", "사망자수"];
+        var data_set = ['자전거', '보행노인', '무단횡단', '보행어린이', '스쿨존어린이'];
+        //24764
+        //var data_중상자수 = [6418/24764, 10044/24764, 7047/24764, 1036/24764, 219/24764];
+
+        var sum_data = data.자전거 + data.보행노인 + data.무단횡단 + data.보행어린이 + data.스쿨존어린이;
+        var data_중상자수 = [data.자전거/sum_data, data.보행노인/sum_data, data.무단횡단/sum_data, data.보행어린이/sum_data, data.스쿨존어린이/sum_data];
+        
+
+        if (this.state.type === "전체") {
+            var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
+        } else if (this.state.type === "자전거") {
+            var color = ["#f9ed69", "gray", "gray", "gray", "gray"];
+        } else if (this.state.type === "보행노인") {
+            var color = ["gray", "#f08a5d", "gray", "gray", "gray"];
+        } else if (this.state.type === "무단횡단") {
+            var color = ["gray", "gray", "#b83b5e", "gray", "gray"];
+        } else if (this.state.type === "보행어린이") {
+            var color = ["gray", "gray", "gray", "#6a2c70", "gray"];
+        } else if (this.state.type === "스쿨존어린이") {
+            var color = ["gray", "gray", "gray", "gray", "#08d9d6"];
+        }
+        var svg4 = d3.select(".pie4")
+                    .append("svg")
+                    .attr("width", 300)
+                    .attr("height", 300)
+
+        var arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(100);
+
+        var p4 =  svg4.selectAll("path")
+                .data(d3.pie()(data_중상자수))
+                .enter()
+                .append("path")
+                .attr("class", "pie")
+                .attr("transform", "translate(150, 150)")
+                .style("fill",function(d, i) {
+                    return color[i];
+                })
+                .attr('d', arc)
+            
+                svg4.append("text")
+                .attr("x", 80)
+                .attr("y", 280)
+                .text("<중상자수 구성률>")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg4.append("text")
+                .attr("x", 180)
+                .attr("y", 150)
+                .text((data_중상자수[1] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg4.append("text")
+                .attr("x", 120)
+                .attr("y", 210)
+                .text((data_중상자수[2] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg4.append("text")
+                .attr("x", 80)
+                .attr("y", 130)
+                .text((data_중상자수[0] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+
+                svg4.append("text")
+                .attr("x", 90)
+                .attr("y", 40)
+                .text((data_중상자수[3] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+            
+                svg4.append("text")
+                .attr("x", 150)
+                .attr("y", 40)
+                .text((data_중상자수[4] * 100).toFixed(1)+ "%")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+    }
+    pieChart_5 = (data) => {
+        //사망자수 구성률
+        var series = ["사상자수", "부상자수", "경상자수", "중상자수", "사망자수"];
+        var data_set = ['자전거', '보행노인', '무단횡단', '보행어린이', '스쿨존어린이'];
+        //2428
+        //var data_사망자수 = [247/2428, 1288/2428, 836/2428, 23/2428, 34/2428];
+
+        var sum_data = data.자전거 + data.보행노인 + data.무단횡단 + data.보행어린이 + data.스쿨존어린이;
+        var data_사망자수 = [data.자전거/sum_data, data.보행노인/sum_data, data.무단횡단/sum_data, data.보행어린이/sum_data, data.스쿨존어린이/sum_data];
+        
+
+        if (this.state.type === "전체") {
+            var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
+        } else if (this.state.type === "자전거") {
+            var color = ["#f9ed69", "gray", "gray", "gray", "gray"];
+        } else if (this.state.type === "보행노인") {
+            var color = ["gray", "#f08a5d", "gray", "gray", "gray"];
+        } else if (this.state.type === "무단횡단") {
+            var color = ["gray", "gray", "#b83b5e", "gray", "gray"];
+        } else if (this.state.type === "보행어린이") {
+            var color = ["gray", "gray", "gray", "#6a2c70", "gray"];
+        } else if (this.state.type === "스쿨존어린이") {
+            var color = ["gray", "gray", "gray", "gray", "#08d9d6"];
+        }
+        var svg5 = d3.select(".pie5")
+                    .append("svg")
+                    .attr("width", 300)
+                    .attr("height", 300)
+
+        var arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(100);
+
+        var p5 = svg5.selectAll("path")
+                .data(d3.pie()(data_사망자수))
+                .enter()
+                .append("path")
+                .attr("class", "pie")
+                .attr("transform", "translate(150, 150)")
+                .style("fill",function(d, i) {
+                    return color[i];
+                })
+                .attr('d', arc)
+
+                svg5.append("text")
+                .attr("x", 80)
+                .attr("y", 280)
+                .text("<사망자수 구성률>")
+                .style("font-size", "16px")
+                .attr("font-family", "맑은고딕")
+                .attr("fill", "black")
+                    
+            svg5.append("text")
+            .attr("x", 180)
+            .attr("y", 150)
+            .text((data_사망자수[1] * 100).toFixed(1) + "%")
+            .style("font-size", "16px")
+            .attr("font-family", "맑은고딕")
+            .attr("fill", "black")
+
+            svg5.append("text")
+            .attr("x", 80)
+            .attr("y", 170)
+            .text((data_사망자수[2] * 100).toFixed(1) + "%")
+            .style("font-size", "16px")
+            .attr("font-family", "맑은고딕")
+            .attr("fill", "black")
+
+            svg5.append("text")
+            .attr("x", 100)
+            .attr("y", 100)
+            .text((data_사망자수[0] * 100).toFixed(1) + "%")
+            .style("font-size", "16px")
+            .attr("font-family", "맑은고딕")
+            .attr("fill", "black")
+
+            svg5.append("text")
+            .attr("x", 100)
+            .attr("y", 40)
+            .text((data_사망자수[4] * 100).toFixed(1) + "%")
+            .style("font-size", "16px")
+            .attr("font-family", "맑은고딕")
+            .attr("fill", "black")
+
+            svg5.append("text")
+            .attr("x", 150)
+            .attr("y", 40)
+            .text((data_사망자수[3] * 100).toFixed(1) + "%")
+            .style("font-size", "16px")
+            .attr("font-family", "맑은고딕")
+            .attr("fill", "black")
+    }
+
     fourthSubMenu_1 = () => {
         //년도별 지역의 사상자 발생률(사상자수/인구)
         var series = ['2014년도', '2015년도', '2016년도', '2017년도', '2018년도'];
@@ -6097,450 +6623,7 @@ var svg = d3.select(".line2")
         
         }
     }
-    pieChart_1 = () => {
-        //사상자수 구성률
-        var series = ["사상자수", "부상자수", "경상자수", "중상자수", "사망자수"];
-        var data_set = ['자전거', '보행노인', '무단횡단', '보행어린이', '스쿨존어린이'];
-        //52013
-        var data_사상자수 = [18603/52013, 17087/52013, 12541/52013, 3178/52013, 604/52013];
-        
-        if (this.state.type === "전체") {
-            var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
-        } else if (this.state.type === "자전거") {
-            var color = ["#f9ed69", "gray", "gray", "gray", "gray"];
-        } else if (this.state.type === "보행노인") {
-            var color = ["gray", "#f08a5d", "gray", "gray", "gray"];
-        } else if (this.state.type === "무단횡단") {
-            var color = ["gray", "gray", "#b83b5e", "gray", "gray"];
-        } else if (this.state.type === "보행어린이") {
-            var color = ["gray", "gray", "gray", "#6a2c70", "gray"];
-        } else if (this.state.type === "스쿨존어린이") {
-            var color = ["gray", "gray", "gray", "gray", "#08d9d6"];
-        }
-        
-        var svg1 = d3.select(".pie1")
-                    .append("svg")
-                    .attr("width", 300)
-                    .attr("height", 300)
-
-        var arc = d3.arc()
-                    .innerRadius(0)
-                    .outerRadius(100);
-
-        var p1 = svg1.selectAll("path")
-                .data(d3.pie()(data_사상자수))
-                .enter()
-                .append("path")
-                .attr("class", "pie")
-                .attr("transform", "translate(150, 150)")
-                .style("fill",function(d, i) {
-                    return color[i];
-                })
-                .attr('d', arc)
-
-            svg1.append("text")
-                .attr("x", 80)
-                .attr("y", 280)
-                .text("<사상자수 구성률>")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-            
-            svg1.append("text")
-                .attr("x", 180)
-                .attr("y", 130)
-                .text((data_사상자수[0] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg1.append("text")
-                .attr("x", 120)
-                .attr("y", 210)
-                .text((data_사상자수[1] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg1.append("text")
-                .attr("x", 70)
-                .attr("y", 130)
-                .text((data_사상자수[2] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg1.append("text")
-                .attr("x", 90)
-                .attr("y", 40)
-                .text((data_사상자수[3] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg1.append("text")
-                .attr("x", 150)
-                .attr("y", 40)
-                .text((data_사상자수[4] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-    }
-    pieChart_2 = () => {
-        //부상자수 구성률
-        var series = ["사상자수", "부상자수", "경상자수", "중상자수", "사망자수"];
-        var data_set = ['자전거', '보행노인', '무단횡단', '보행어린이', '스쿨존어린이'];
-        //3610
-        var data_부상자수 = [2396/3610, 551/3610, 440/3610, 201/3610, 22/3610];
-
-        if (this.state.type === "전체") {
-            var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
-        } else if (this.state.type === "자전거") {
-            var color = ["#f9ed69", "gray", "gray", "gray", "gray"];
-        } else if (this.state.type === "보행노인") {
-            var color = ["gray", "#f08a5d", "gray", "gray", "gray"];
-        } else if (this.state.type === "무단횡단") {
-            var color = ["gray", "gray", "#b83b5e", "gray", "gray"];
-        } else if (this.state.type === "보행어린이") {
-            var color = ["gray", "gray", "gray", "#6a2c70", "gray"];
-        } else if (this.state.type === "스쿨존어린이") {
-            var color = ["gray", "gray", "gray", "gray", "#08d9d6"];
-        }
-
-        var svg2 = d3.select(".pie2")
-                    .append("svg")
-                    .attr("width", 300)
-                    .attr("height", 300)
-
-        var arc = d3.arc()
-                    .innerRadius(0)
-                    .outerRadius(100);
-
-        var p2 = svg2.selectAll("path")
-                .data(d3.pie()(data_부상자수))
-                .enter()
-                .append("path")
-                .attr("class", "pie")
-                .attr("transform", "translate(150, 150)")
-                .style("fill",function(d, i) {
-                    return color[i];
-                })
-                .attr('d', arc)
-
-                svg2.append("text")
-                .attr("x", 80)
-                .attr("y", 280)
-                .text("<부상자수 구성률>")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg2.append("text")
-                .attr("x", 180)
-                .attr("y", 180)
-                .text((data_부상자수[0] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg2.append("text")
-                .attr("x", 70)
-                .attr("y", 160)
-                .text((data_부상자수[1] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg2.append("text")
-                .attr("x", 80)
-                .attr("y", 110)
-                .text((data_부상자수[2] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg2.append("text")
-                .attr("x", 100)
-                .attr("y", 40)
-                .text((data_부상자수[3] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg2.append("text")
-                .attr("x", 150)
-                .attr("y", 40)
-                .text((data_부상자수[4] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-
-    }
-    pieChart_3 = () => {
-        //경상자수 구성률
-        var series = ["사상자수", "부상자수", "경상자수", "중상자수", "사망자수"];
-        var data_set = ['자전거', '보행노인', '무단횡단', '보행어린이', '스쿨존어린이'];
-        //21215
-        var data_경상자수 = [9542/21215, 5204/21215, 4222/21215, 1918/21215, 329/21215];
-
-        if (this.state.type === "전체") {
-            var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
-        } else if (this.state.type === "자전거") {
-            var color = ["#f9ed69", "gray", "gray", "gray", "gray"];
-        } else if (this.state.type === "보행노인") {
-            var color = ["gray", "#f08a5d", "gray", "gray", "gray"];
-        } else if (this.state.type === "무단횡단") {
-            var color = ["gray", "gray", "#b83b5e", "gray", "gray"];
-        } else if (this.state.type === "보행어린이") {
-            var color = ["gray", "gray", "gray", "#6a2c70", "gray"];
-        } else if (this.state.type === "스쿨존어린이") {
-            var color = ["gray", "gray", "gray", "gray", "#08d9d6"];
-        }
-        var svg3 = d3.select(".pie3")
-                    .append("svg")
-                    .attr("width", 300)
-                    .attr("height", 300)
-
-        var arc = d3.arc()
-                    .innerRadius(0)
-                    .outerRadius(100);
-
-        var p3 = svg3.selectAll("path")
-                .data(d3.pie()(data_경상자수))
-                .enter()
-                .append("path")
-                .attr("class", "pie")
-                .attr("transform", "translate(150, 150)")
-                .style("fill",function(d, i) {
-                    return color[i];
-                })
-                .attr('d', arc)
-
-            svg3.append("text")
-                .attr("x", 80)
-                .attr("y", 280)
-                .text("<경상자수 구성률>")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-                
-            svg3.append("text")
-            .attr("x", 180)
-            .attr("y", 150)
-            .text((data_경상자수[0] * 100).toFixed(1)+ "%")
-            .style("font-size", "16px")
-            .attr("font-family", "맑은고딕")
-            .attr("fill", "black")
-
-            svg3.append("text")
-            .attr("x", 110)
-            .attr("y", 210)
-            .text((data_경상자수[1] * 100).toFixed(1)+ "%")
-            .style("font-size", "16px")
-            .attr("font-family", "맑은고딕")
-            .attr("fill", "black")
-
-            svg3.append("text")
-            .attr("x", 70)
-            .attr("y", 140)
-            .text((data_경상자수[2] * 100).toFixed(1)+ "%")
-            .style("font-size", "16px")
-            .attr("font-family", "맑은고딕")
-            .attr("fill", "black")
-
-            svg3.append("text")
-            .attr("x", 90)
-            .attr("y", 40)
-            .text((data_경상자수[3] * 100).toFixed(1)+ "%")
-            .style("font-size", "16px")
-            .attr("font-family", "맑은고딕")
-            .attr("fill", "black")
-
-            svg3.append("text")
-            .attr("x", 140)
-            .attr("y", 40)
-            .text((data_경상자수[4] * 100).toFixed(1)+ "%")
-            .style("font-size", "16px")
-            .attr("font-family", "맑은고딕")
-            .attr("fill", "black")
-    }
-    pieChart_4 = () => {
-        //중상자수 구성률
-        var series = ["사상자수", "부상자수", "경상자수", "중상자수", "사망자수"];
-        var data_set = ['자전거', '보행노인', '무단횡단', '보행어린이', '스쿨존어린이'];
-        //24764
-        var data_중상자수 = [6418/24764, 10044/24764, 7047/24764, 1036/24764, 219/24764];
-
-        if (this.state.type === "전체") {
-            var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
-        } else if (this.state.type === "자전거") {
-            var color = ["#f9ed69", "gray", "gray", "gray", "gray"];
-        } else if (this.state.type === "보행노인") {
-            var color = ["gray", "#f08a5d", "gray", "gray", "gray"];
-        } else if (this.state.type === "무단횡단") {
-            var color = ["gray", "gray", "#b83b5e", "gray", "gray"];
-        } else if (this.state.type === "보행어린이") {
-            var color = ["gray", "gray", "gray", "#6a2c70", "gray"];
-        } else if (this.state.type === "스쿨존어린이") {
-            var color = ["gray", "gray", "gray", "gray", "#08d9d6"];
-        }
-        var svg4 = d3.select(".pie4")
-                    .append("svg")
-                    .attr("width", 300)
-                    .attr("height", 300)
-
-        var arc = d3.arc()
-                    .innerRadius(0)
-                    .outerRadius(100);
-
-        var p4 =  svg4.selectAll("path")
-                .data(d3.pie()(data_중상자수))
-                .enter()
-                .append("path")
-                .attr("class", "pie")
-                .attr("transform", "translate(150, 150)")
-                .style("fill",function(d, i) {
-                    return color[i];
-                })
-                .attr('d', arc)
-            
-                svg4.append("text")
-                .attr("x", 80)
-                .attr("y", 280)
-                .text("<중상자수 구성률>")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg4.append("text")
-                .attr("x", 180)
-                .attr("y", 150)
-                .text((data_중상자수[1] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg4.append("text")
-                .attr("x", 120)
-                .attr("y", 210)
-                .text((data_중상자수[2] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg4.append("text")
-                .attr("x", 80)
-                .attr("y", 130)
-                .text((data_중상자수[0] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-
-                svg4.append("text")
-                .attr("x", 90)
-                .attr("y", 40)
-                .text((data_중상자수[3] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-            
-                svg4.append("text")
-                .attr("x", 150)
-                .attr("y", 40)
-                .text((data_중상자수[4] * 100).toFixed(1)+ "%")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-    }
-    pieChart_5 = () => {
-        //사망자수 구성률
-        var series = ["사상자수", "부상자수", "경상자수", "중상자수", "사망자수"];
-        var data_set = ['자전거', '보행노인', '무단횡단', '보행어린이', '스쿨존어린이'];
-        //2428
-        var data_사망자수 = [247/2428, 1288/2428, 836/2428, 23/2428, 34/2428];
-
-        if (this.state.type === "전체") {
-            var color = ["#f9ed69", "#f08a5d", "#b83b5e", "#6a2c70", "#08d9d6"];
-        } else if (this.state.type === "자전거") {
-            var color = ["#f9ed69", "gray", "gray", "gray", "gray"];
-        } else if (this.state.type === "보행노인") {
-            var color = ["gray", "#f08a5d", "gray", "gray", "gray"];
-        } else if (this.state.type === "무단횡단") {
-            var color = ["gray", "gray", "#b83b5e", "gray", "gray"];
-        } else if (this.state.type === "보행어린이") {
-            var color = ["gray", "gray", "gray", "#6a2c70", "gray"];
-        } else if (this.state.type === "스쿨존어린이") {
-            var color = ["gray", "gray", "gray", "gray", "#08d9d6"];
-        }
-        var svg5 = d3.select(".pie5")
-                    .append("svg")
-                    .attr("width", 300)
-                    .attr("height", 300)
-
-        var arc = d3.arc()
-                    .innerRadius(0)
-                    .outerRadius(100);
-
-        var p5 = svg5.selectAll("path")
-                .data(d3.pie()(data_사망자수))
-                .enter()
-                .append("path")
-                .attr("class", "pie")
-                .attr("transform", "translate(150, 150)")
-                .style("fill",function(d, i) {
-                    return color[i];
-                })
-                .attr('d', arc)
-
-                svg5.append("text")
-                .attr("x", 80)
-                .attr("y", 280)
-                .text("<사망자수 구성률>")
-                .style("font-size", "16px")
-                .attr("font-family", "맑은고딕")
-                .attr("fill", "black")
-                    
-            svg5.append("text")
-            .attr("x", 180)
-            .attr("y", 150)
-            .text((data_사망자수[1] * 100).toFixed(1) + "%")
-            .style("font-size", "16px")
-            .attr("font-family", "맑은고딕")
-            .attr("fill", "black")
-
-            svg5.append("text")
-            .attr("x", 80)
-            .attr("y", 170)
-            .text((data_사망자수[2] * 100).toFixed(1) + "%")
-            .style("font-size", "16px")
-            .attr("font-family", "맑은고딕")
-            .attr("fill", "black")
-
-            svg5.append("text")
-            .attr("x", 100)
-            .attr("y", 100)
-            .text((data_사망자수[0] * 100).toFixed(1) + "%")
-            .style("font-size", "16px")
-            .attr("font-family", "맑은고딕")
-            .attr("fill", "black")
-
-            svg5.append("text")
-            .attr("x", 100)
-            .attr("y", 40)
-            .text((data_사망자수[4] * 100).toFixed(1) + "%")
-            .style("font-size", "16px")
-            .attr("font-family", "맑은고딕")
-            .attr("fill", "black")
-
-            svg5.append("text")
-            .attr("x", 150)
-            .attr("y", 40)
-            .text((data_사망자수[3] * 100).toFixed(1) + "%")
-            .style("font-size", "16px")
-            .attr("font-family", "맑은고딕")
-            .attr("fill", "black")
-    }
+    
 
     drawChart = () => {
         d3.select('svg').remove();
@@ -6548,15 +6631,20 @@ var svg = d3.select(".line2")
         d3.select('svg').remove();
         d3.select('svg').remove();
         d3.select('svg').remove();
+        d3.select('svg').remove();
 
         if (this.props.clickedSubMenu === "교통사고 발생건수와 사상자수") {
-            this.firstSubMenu_1();
-            this.firstSubMenu_2();
+            this._line1();
+            this._bar1();
         } else if (this.props.clickedSubMenu === "사고유형별 발생건수") {
-            this.secondSubMenu_1();
-            this.secondSubMenu_2();
+            this._bar2();
+            this._line2();
         } else if (this.props.clickedSubMenu === "사고유형별 사상자수 세부 구성") {
-            this.thirdSubMenu_1();
+            this._pie1();
+            this._pie2();
+            this._pie3();
+            this._pie4();
+            this._pie5();
         } else if (this.props.clickedSubMenu === "지역별 사상자 발생률") {
             this.fourthSubMenu_1();
             this.fifthSubMenu_1();
@@ -6577,10 +6665,11 @@ var svg = d3.select(".line2")
         } else if (this.props.clickedSubMenu === "사고유형별 발생건수") {
             _chart = 
                 <div>
-                    <div className = "bar2"></div>
-                    <div><p>[사고유형별 발생건수]</p></div>
-                    <div className = "line2"></div>
-                    <div><p>[사고유형별 년도에 따른 발생건수 추이]</p></div>
+                    <div className = "second">
+                        <div className = "bar2"></div>
+                        <div className = "line2"></div>
+                    </div>
+                    <div><p>[사고유형별 발생건수]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[사고유형별 년도에 따른 발생건수 추이]</p></div>
                 </div>;
         } else if (this.props.clickedSubMenu === "사고유형별 사상자수 세부 구성") {
             _chart =
