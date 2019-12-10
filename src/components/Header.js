@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import './css/Header.css';
+
 import logo from './img/logo.png';
 
 class Header extends Component {
     constructor(props) {
         super(props)
         this.state = {
-          clickedDB: 'korea',
           click1: 'select',
           click2: 'nonselect'
         };
@@ -19,19 +19,17 @@ class Header extends Component {
       ChangeDB = (e) => {
         if(e.currentTarget.value === "korea") {
             this.setState({
-                clickedDB: 'korea',
                 click1: 'select',
                 click2: 'nonselect'
             });
         } else if (e.currentTarget.value === "chicago") {
             this.setState({
-                clickedDB: 'chicago',
                 click1: 'nonselect',
                 click2: 'select'
             });
         }
-        
-        this.props.ChangeDB(this.state.clickedDB);
+
+        this.props.ChangeDB(e.currentTarget.value);
       }
 
       render() {

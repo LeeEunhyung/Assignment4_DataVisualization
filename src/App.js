@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
 import axios from 'axios';
+
+import './App.css';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -21,7 +22,8 @@ class App extends Component {
 
   ChangeDB = (_clickedDB) => {
     this.setState({
-      clickedDB: _clickedDB
+      clickedDB: _clickedDB,
+      clickedSubMenu: 'DataLoad'
     });
   }
 
@@ -29,7 +31,6 @@ class App extends Component {
     this.setState({
       clickedSubMenu: _clickedSubMenu
     });
-    alert(this.state.clickedSubMenu)
   }
 
   _test = async() => {
