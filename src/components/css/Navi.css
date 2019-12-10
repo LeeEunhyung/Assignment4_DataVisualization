@@ -1,0 +1,14 @@
+.Navi {
+    width: 100%;
+    height: 100%;
+}
+
+.Navi > #title {
+    width: 100%;
+    height: 10%;
+    background-color: rgb(190, 6, 0);
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    text-align: center;
+}
