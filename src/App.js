@@ -13,7 +13,7 @@ class App extends Component {
     super(props)
     this.state = {
       clickedDB: 'korea',
-      clickedSubMenu: 'DataLoad'
+      clickedSubMenu: ''
     };
   }
 
@@ -23,7 +23,7 @@ class App extends Component {
   ChangeDB = (_clickedDB) => {
     this.setState({
       clickedDB: _clickedDB,
-      clickedSubMenu: 'DataLoad'
+      clickedSubMenu: ''
     });
   }
 
