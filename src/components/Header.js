@@ -36,7 +36,7 @@ class Header extends Component {
         return (
             <div className = "Header">
                 <div id = "logo">
-                    <img src = {logo} alt = "logo"></img>
+                    <img src = {logo} alt = "logo" onClick={function() {window.location = '/'}}></img>
                 </div>
                 <div id = "header_menu">
                     <button type="button" id={this.state.click1} value="korea" onClick = {this.ChangeDB}>Traffic Accidents in Korea</button>

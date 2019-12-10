@@ -13,6 +13,7 @@
 .Header > #logo > img {
     width: 100%;
     margin: 15px auto;
+    cursor: pointer;
 }
 
 .Header > #header_menu {
