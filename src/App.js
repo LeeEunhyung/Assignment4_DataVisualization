@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import './App.css';
 
@@ -12,8 +11,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      clickedDB: 'korea',
-      clickedSubMenu: ''
+      clickedDB: "korea",
+      clickedSubMenu: ""
     };
   }
 
@@ -21,24 +20,22 @@ class App extends Component {
   }
 
   ChangeDB = (_clickedDB) => {
-    this.setState({
-      clickedDB: _clickedDB,
-      clickedSubMenu: ''
-    });
+    if (_clickedDB === "korea") {
+      this.setState({
+        clickedDB: _clickedDB,
+        clickedSubMenu: "교통사고 발생건수와 사상자수"
+      });
+    } else if (_clickedDB === "chicago") {
+        this.setState({
+          clickedDB: _clickedDB,
+          clickedSubMenu: ""
+        });
+    }
   }
 
   ChangeSubMenu = (_clickedSubMenu) => {
     this.setState({
       clickedSubMenu: _clickedSubMenu
-    });
-  }
-
-  _test = async() => {
-    await axios({
-      url: '/test',
-      method: 'POST'
-    }).then(response => response.data).then((data) => {
-      alert(data);
     });
   }
 

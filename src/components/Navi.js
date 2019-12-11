@@ -36,20 +36,17 @@ class Navi extends Component {
             _subMenu = 
                 <div id = "subMenu">
                     <input type = "button" id = "line1" value = "교통사고 발생건수와 사상자수" onClick = {this.ChangeSubMenu}></input>
-                    <input type = "button" id = "bar1" value = "교통사고 사상자수 세부 구성" onClick = {this.ChangeSubMenu}></input>
                     <input type = "button" id = "bar2" value = "사고유형별 발생건수" onClick = {this.ChangeSubMenu}></input>
-                    <input type = "button" id = "line2" value = "사고유형별 년도에 따른 발생건수" onClick = {this.ChangeSubMenu}></input>
                     <input type = "button" id = "pie1" value = "사고유형별 사상자수 세부 구성" onClick = {this.ChangeSubMenu}></input>
-                    <input type = "button" id = "scatter_plot1" value = "년도별 지역의 사상자 발생률" onClick = {this.ChangeSubMenu}></input>
+                    <input type = "button" id = "scatter_plot1" value = "지역별 사상자 발생률" onClick = {this.ChangeSubMenu}></input>
                 </div>;
         } else if (this.props.clickedDB === 'chicago') {
             _subMenu = 
                 <div id = "subMenu">
                     <input type = "button" id = "ArrestLine" value = "년도별 채포율 추이" onClick = {this.ChangeSubMenu}></input>
-                    <input type = "button" id = "TypeBar" value = "범죄 유형별 채포율 Top 3" onClick = {this.ChangeSubMenu}></input>
                     <input type = "button" id = "Firearm" value = "총기관련 범죄 구성율" onClick = {this.ChangeSubMenu}></input>
                     <input type = "button" id = "Firearm" value = "총기관련 범죄 채포율" onClick = {this.ChangeSubMenu}></input>
-                    <input type = "button" id = "CrimeDistrict" value = "지역별 범죄 발생 비율 및 위험구역" onClick = {this.ChangeSubMenu}></input>
+                    <input type = "button" id = "CrimeDistrict" value = "년도별 범죄 발생율 Top3 구역" onClick = {this.ChangeSubMenu}></input>
                 </div>;
         }
 
