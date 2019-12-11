@@ -3,13 +3,15 @@
     flex-direction: row;
     width: 100%;
     height: 100%;
-    
 }
 
 .Header > #logo {
     width: 15%;
     height: 100%;
+    display: flex;
+    flex-direction: row;
 }
+
 .Header > #logo > img {
     width: 100%;
     margin: 15px auto;
@@ -23,12 +25,13 @@
     vertical-align: middle;
     text-align: center;
     outline: none;
+    margin: auto;
 }
 
 #header_menu > #select {
-    color: black;
-    background-color: white;
-    width: 40%;
+    color: white;
+    background-color: rgb(190, 6, 0);
+    width: 50%;
     height: 100%;
     border: none;
     font-size: 20px;
@@ -41,7 +44,7 @@
 #header_menu > #nonselect {
     color: black;
     background-color: white;
-    width: 40%;
+    width: 50%;
     height: 100%;
     border: none;
     font-size: 20px;

@@ -58,7 +58,7 @@ class Navi extends Component {
         var _subMenu = this.SetSubMenu();
         return (
             <div className = "Navi">
-                {_title}
+                {/*_title*/}
                 {_subMenu}
             </div>
         );

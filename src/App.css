@@ -3,6 +3,7 @@
   text-align: left;
   width: 1480px;
   height: 760px;
+  overflow: hidden;
 }
 
 .App > #top {
@@ -25,7 +26,10 @@
 .App > #middle > #Main {
   width: 85%;
   height: 100%;
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/rip.svg);
+  background-color: white;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border: solid 1px rgb(190, 6, 0);
 }
 
 .App > #bottom {

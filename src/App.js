@@ -23,7 +23,7 @@ class App extends Component {
     if (_clickedDB === "korea") {
       this.setState({
         clickedDB: _clickedDB,
-        clickedSubMenu: "교통사고 발생건수와 사상자수"
+        clickedSubMenu: ""
       });
     } else if (_clickedDB === "chicago") {
         this.setState({

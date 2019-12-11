@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import * as d3 from 'd3';
 
+import './css/Main.css';
+
 class Main extends Component {
     constructor(props) {
         super(props)
@@ -1196,24 +1198,16 @@ class Main extends Component {
         } else if (this.props.clickedSubMenu === "지역별 사상자 발생률") {
             this.fourthSubMenu_1();
             this.fifthSubMenu_1();
-        }
-
-        if (this.props.clickedSubMenu === "년도별 채포율 추이") {
+        } else if (this.props.clickedSubMenu === "년도별 채포율 추이") {
             this.waiting();
             this.AAR();
-        }
-
-        if (this.props.clickedSubMenu === "총기관련 범죄 구성율") {
+        } else if (this.props.clickedSubMenu === "총기관련 범죄 구성율") {
             this.waiting();
             this.GRP();
-        }
-
-        if (this.props.clickedSubMenu === "총기관련 범죄 채포율") {
+        } else if (this.props.clickedSubMenu === "총기관련 범죄 채포율") {
             this.waiting();
             this.GRAR();
-        }
-
-        if (this.props.clickedSubMenu === "년도별 범죄 발생율 Top3 구역") {
+        } else if (this.props.clickedSubMenu === "년도별 범죄 발생율 Top3 구역") {
             this.DCR();
         }
     }
@@ -1234,7 +1228,7 @@ class Main extends Component {
 
         var color = ["#fa4659", "#11cbd7"];
 
-        var svg = d3.select(".Main")
+        var svg = d3.select(".line1")
                     .append("svg")
                     .attr('width', 500)
                     .attr('height', 300);
