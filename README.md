@@ -1,4 +1,4 @@
-# Assignment4_DataVisualization
+# DataVisualization_Assignment4
 - 데이터 시각화 과제4 - react.js를 활용해 데이터 시각화 웹 시스템 만들기 (Team Project)
 - 과제2와 과제3를 토대로 시각화 웹 시스템 구성
   - LeeEunhyung 데이터 시각화 과제2 [LeeEunhyung/TrafficAccidentInKorea_DataVisualization](https://github.com/LeeEunhyung/TrafficAccidentInKorea_DataVisualization)
