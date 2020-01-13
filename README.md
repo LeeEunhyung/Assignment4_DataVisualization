@@ -63,8 +63,11 @@
     yarn start
     ```
     
-    b. LeeEunhyung/Assignment4_DataVisualization 을 서버에 다운 받아 __a.__ 에서 생성한 폴더에 적용시킨 후, 앱을 실행시켜 해당 페이지를 확인합니다.
+    b. LeeEunhyung/DataVisualization_Assignment4 을 서버에 다운 받아 __a.__ 에서 생성한 폴더에 적용시킨 후, 서버를 키고 앱을 실행시켜 해당 페이지를 확인합니다.
     ```
+    cd [server.js가 담긴 폴더 경로]
+    node server.js
+    cd [create-react-app 경로]
     yarn start
     ```
     
